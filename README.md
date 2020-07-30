@@ -1,2 +1,2 @@
 # tonerinv
-App for toners inventory managment
+App for toners inventory management

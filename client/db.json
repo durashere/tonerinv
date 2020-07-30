@@ -1,0 +1,14 @@
+{
+  "toners": [
+    {
+      "model": "first",
+      "amount": 4,
+      "id": 1
+    },
+    {
+      "model": "second",
+      "amount": 3,
+      "id": 2
+    }
+  ]
+}
