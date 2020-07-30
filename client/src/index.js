@@ -6,8 +6,6 @@ import store from "./store";
 import tonerService from "./services/toners";
 import { initToners } from "./reducers/tonerReducer";
 
-import "./index.css";
-
 tonerService.getAll().then((toners) => store.dispatch(initToners(toners)));
 
 ReactDOM.render(

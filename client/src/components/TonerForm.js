@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Button, TextField } from "@material-ui/core";
+
 import { createToner } from "../reducers/tonerReducer";
 
 const TonerForm = () => {
@@ -16,16 +18,16 @@ const TonerForm = () => {
     <div>
       <form onSubmit={addToner}>
         <div>
-          model:
-          <input
-            id="tonerform__model"
+          <TextField
+            label="Model"
+            variant="outlined"
             value={model}
             onChange={({ target }) => setModel(target.value)}
           />
+          <Button variant="contained" color="primary" type="submit">
+            create
+          </Button>
         </div>
-        <button id="tonerform__submit" type="submit">
-          create
-        </button>
       </form>
     </div>
   );
