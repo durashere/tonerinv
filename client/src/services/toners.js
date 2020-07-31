@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/api/toners";
+const baseUrl = "/api/toners";
 
 // eslint-disable-next-line no-unused-vars
 let token = null;
