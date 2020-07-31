@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { TableCell, TableRow, Button } from "@material-ui/core";
+import { TableRow, TableCell, Button } from "@material-ui/core";
 
 import { subToner, addToner } from "../reducers/tonerReducer";
 
@@ -21,8 +21,8 @@ const Toner = ({ toner }) => {
   return (
     <TableRow>
       <TableCell>{toner.model}</TableCell>
-      <TableCell>{toner.amount}</TableCell>
-      <TableCell>
+      <TableCell align="center">{toner.amount}</TableCell>
+      <TableCell align="right">
         <Button variant="contained" type="button" onClick={handleSubToner}>
           -
         </Button>

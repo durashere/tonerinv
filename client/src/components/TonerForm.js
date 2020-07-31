@@ -24,7 +24,7 @@ const TonerForm = () => {
             value={model}
             onChange={({ target }) => setModel(target.value)}
           />
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant="outlined" color="primary" type="submit">
             create
           </Button>
         </div>

@@ -1,39 +1,12 @@
-import React, { useEffect } from "react";
-import Container from "@material-ui/core/Container";
-import {
-  createMuiTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import React from "react";
 
-import TonerForm from "./components/TonerForm";
-import TonerList from "./components/TonerList";
-
-import { initToners } from "./reducers/tonerReducer";
-
-const darkTheme = createMuiTheme({
-  palette: {
-    type: "dark",
-  },
-});
+import Dashboard from "./components/Dashboard";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initToners());
-  }, [dispatch]);
-
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Container>
-        <div>
-          <TonerForm />
-          <TonerList />
-        </div>
-      </Container>
-    </ThemeProvider>
+    <div>
+      <Dashboard />
+    </div>
   );
 }
 
