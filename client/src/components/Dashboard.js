@@ -16,7 +16,10 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 // import Link from "@material-ui/core/Link";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
@@ -24,7 +27,7 @@ import TonerList from "./TonerList";
 import TonerForm from "./TonerForm";
 import Copyright from "./Copyright";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,15 +108,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard({ user, handleLogout }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   //   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -129,7 +128,7 @@ export default function Dashboard() {
               edge="start"
               color="inherit"
               aria-label="open drawer"
-              onClick={handleDrawerOpen}
+              onClick={() => setOpen(true)}
               className={clsx(
                 classes.menuButton,
                 open && classes.menuButtonHidden,
@@ -143,14 +142,35 @@ export default function Dashboard() {
               color="inherit"
               noWrap
               className={classes.title}
-            >
-              Toner Inv
-            </Typography>
-            {/* <IconButton color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+            />
+            <div>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={(e) => setAnchorEl(e.currentTarget)}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={() => setAnchorEl(null)}
+              >
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -161,7 +181,7 @@ export default function Dashboard() {
           open={open}
         >
           <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton onClick={() => setOpen(false)}>
               <ChevronLeftIcon />
             </IconButton>
           </div>
@@ -178,7 +198,7 @@ export default function Dashboard() {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                      <TonerForm />
+                      <TonerForm user={user} />
                     </Paper>
                   </Grid>
                 </Grid>
@@ -187,7 +207,7 @@ export default function Dashboard() {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                      <TonerList />
+                      <TonerList user={user} />
                     </Paper>
                   </Grid>
                 </Grid>

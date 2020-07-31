@@ -12,8 +12,9 @@ function App() {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedAppUser");
     if (loggedUserJSON) {
-      setUser(JSON.parse(loggedUserJSON));
-      tonerService.setToken(user.token);
+      const signInUser = JSON.parse(loggedUserJSON);
+      setUser(signInUser);
+      tonerService.setToken(signInUser.token);
     }
   }, []);
 
@@ -26,10 +27,20 @@ function App() {
     setUser(signInUser);
   };
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    window.localStorage.removeItem("loggedAppUser");
+    tonerService.setToken(null);
+    setUser(null);
+  };
+
   return (
     <div>
-      {user === null ? <SignIn handleLogin={handleLogin} /> : <Dashboard />}
-      {/* <SignIn handleLogin={handleLogin} /> */}
+      {user === null ? (
+        <SignIn handleLogin={handleLogin} />
+      ) : (
+        <Dashboard user={user} handleLogout={handleLogout} />
+      )}
     </div>
   );
 }

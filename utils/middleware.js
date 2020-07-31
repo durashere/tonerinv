@@ -11,10 +11,9 @@ const requestLogger = (request, response, next) => {
 
 const tokenExtractor = (request, response, next) => {
   const authorization = request.get("authorization");
+  request.token = null;
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
     request.token = jwt.verify(authorization.substring(7), process.env.SECRET);
-  } else {
-    request.token = null;
   }
   next();
 };
@@ -41,8 +40,8 @@ const errorHandler = (error, request, response, next) => {
 };
 
 module.exports = {
-  tokenExtractor,
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  tokenExtractor,
 };

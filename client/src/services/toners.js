@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/toners";
 
+// eslint-disable-next-line no-unused-vars
 let token = null;
 
 const setToken = (newToken) => {
@@ -14,7 +15,11 @@ const getAll = async () => {
 };
 
 const create = async (newObject) => {
-  const response = await axios.post(baseUrl, newObject);
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.post(baseUrl, newObject, config);
   return response.data;
 };
 
@@ -24,7 +29,11 @@ const update = async (id, updatedObject) => {
 };
 
 const remove = async (id) => {
-  const response = await axios.delete(`${baseUrl}/${id}`);
+  const config = {
+    headers: { Authorization: token },
+  };
+
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
   return response.data;
 };
 
