@@ -1,6 +1,12 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3001/toners";
+const baseUrl = "http://localhost:3001/api/toners";
+
+let token = null;
+
+const setToken = (newToken) => {
+  token = `bearer ${newToken}`;
+};
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
@@ -23,6 +29,7 @@ const remove = async (id) => {
 };
 
 export default {
+  setToken,
   getAll,
   create,
   update,

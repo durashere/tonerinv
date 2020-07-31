@@ -22,15 +22,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
 import TonerList from "./TonerList";
 import TonerForm from "./TonerForm";
-import Title from "./Title";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      Copyright © Duras {new Date().getFullYear()}.
-    </Typography>
-  );
-}
+import Copyright from "./Copyright";
 
 const drawerWidth = 240;
 

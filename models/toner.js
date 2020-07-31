@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 
 const tonerSchema = mongoose.Schema({
   model: { type: String },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 tonerSchema.set("toJSON", {
@@ -14,5 +18,5 @@ tonerSchema.set("toJSON", {
   },
 });
 
-const Blog = mongoose.model("Toner", tonerSchema, "toners");
-module.exports = Blog;
+const Toner = mongoose.model("Toner", tonerSchema, "toners");
+module.exports = Toner;
