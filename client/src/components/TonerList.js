@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import {
   Table,
   TableHead,
@@ -8,15 +8,9 @@ import {
   TableBody,
 } from "@material-ui/core";
 import Toner from "./Toner";
-import { initToners } from "../reducers/tonerReducer";
 
 const TonerList = () => {
-  const dispatch = useDispatch();
   const toners = useSelector((state) => state.toners);
-
-  useEffect(() => {
-    dispatch(initToners());
-  }, [dispatch]);
 
   return (
     <>

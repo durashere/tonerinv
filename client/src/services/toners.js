@@ -1,7 +1,12 @@
 import axios from "axios";
 
-const baseUrl = "/api/toners";
+let baseUrl;
 
+if (process.env.NODE_ENV === "development") {
+  baseUrl = "http://localhost:3001/api/toners";
+} else {
+  baseUrl = "/api/toners";
+}
 // eslint-disable-next-line no-unused-vars
 let token = null;
 

@@ -11,10 +11,13 @@ const reducer = (state = [], action) => {
       return state.concat(action.data);
 
     case "ADD_TONER":
-      return state.map((a) => (a.id === action.data.id ? action.data : a));
+      return state.map((t) => (t.id === action.data.id ? action.data : t));
 
     case "SUB_TONER":
-      return state.map((a) => (a.id === action.data.id ? action.data : a));
+      return state.map((t) => (t.id === action.data.id ? action.data : t));
+
+    case "REMOVE_TONER":
+      return state.filter((t) => t.id !== action.data.id);
 
     default:
       return state;
@@ -63,6 +66,13 @@ export const subToner = (toner) => {
     };
     const updatedToner = await tonerService.update(toner.id, addedToner);
     dispatch({ type: "ADD_TONER", data: updatedToner });
+  };
+};
+
+export const removeToner = (toner) => {
+  return async (dispatch) => {
+    await tonerService.remove(toner.id);
+    dispatch({ type: "REMOVE_TONER", data: toner });
   };
 };
 
