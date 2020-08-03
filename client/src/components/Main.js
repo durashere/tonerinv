@@ -196,9 +196,6 @@ export default function Main({ user, handleLogout }) {
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Dashboard />
-            </Switch>
-            <Switch>
               <Route path="/tonerform">
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
@@ -216,6 +213,9 @@ export default function Main({ user, handleLogout }) {
                     </Paper>
                   </Grid>
                 </Grid>
+              </Route>
+              <Route path="/">
+                <Dashboard />
               </Route>
             </Switch>
 
