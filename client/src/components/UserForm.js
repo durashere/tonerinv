@@ -8,7 +8,6 @@ const UserForm = () => {
   const dispatch = useDispatch();
   const [usergroup, setUsergroup] = useState("");
   const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
   const groups = [
@@ -28,14 +27,12 @@ const UserForm = () => {
     const userObject = {
       usergroup,
       username,
-      nickname,
       password,
     };
 
     dispatch(createUser(userObject));
 
     setUsername("");
-    setNickname("");
     setPassword("");
   };
 
@@ -74,18 +71,7 @@ const UserForm = () => {
             autoComplete="username"
             autoFocus
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nickname"
-            label="Nickname"
-            name="nickname"
-            value={nickname}
-            onChange={(e) => setNickname(e.target.value)}
-            autoComplete="nickname"
-          />
+
           <TextField
             variant="outlined"
             margin="normal"

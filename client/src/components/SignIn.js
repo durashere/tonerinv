@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +15,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "./Copyright";
+
+import tonerService from "../services/tonerService";
+import loginService from "../services/loginService";
+
+import { loginUser } from "../reducers/currentUserReducer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,8 +41,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ handleLogin }) {
+export default function SignIn() {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const handleLogin = async (credential) => {
+    const signInUser = await loginService.login(credential);
+
+    window.localStorage.setItem("loggedAppUser", JSON.stringify(signInUser));
+    tonerService.setToken(signInUser.token);
+
+    dispatch(loginUser(signInUser));
+  };
 
   const createLogin = (event) => {
     event.preventDefault();

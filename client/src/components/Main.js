@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,17 +10,14 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-// import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-// import Link from "@material-ui/core/Link";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-// import NotificationsIcon from "@material-ui/icons/Notifications";
 
 import MainDrawer from "./MainDrawer";
 import Dashboard from "./Dashboard";
@@ -28,6 +26,9 @@ import UserForm from "./UserForm";
 import TonerList from "./TonerList";
 import TonerForm from "./TonerForm";
 import Copyright from "./Copyright";
+
+import tonerService from "../services/tonerService";
+import { logoutUser } from "../reducers/currentUserReducer";
 
 const drawerWidth = 200;
 
@@ -110,10 +111,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main({ user, handleLogout }) {
+export default function Main() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    window.localStorage.removeItem("loggedAppUser");
+    tonerService.setToken(null);
+
+    dispatch(logoutUser());
+  };
 
   //   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -195,7 +205,7 @@ export default function Main({ user, handleLogout }) {
             <Switch>
               <Route path="/toners/list">
                 <Paper>
-                  <TonerList user={user} />
+                  <TonerList />
                 </Paper>
               </Route>
 
@@ -209,7 +219,7 @@ export default function Main({ user, handleLogout }) {
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>
-                      <TonerForm user={user} />
+                      <TonerForm />
                     </Paper>
                   </Grid>
                 </Grid>
@@ -219,7 +229,7 @@ export default function Main({ user, handleLogout }) {
                 <Grid container spacing={3}>
                   <Grid item xs={3}>
                     <Paper className={classes.paper}>
-                      <UserForm user={user} />
+                      <UserForm />
                     </Paper>
                   </Grid>
                 </Grid>

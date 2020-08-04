@@ -6,7 +6,6 @@ const uniqueValidator = require("mongoose-unique-validator");
 const userSchema = new mongoose.Schema({
   usergroup: { type: String, required: true },
   username: { type: String, unique: true, required: true, minlength: 3 },
-  nickname: { type: String, required: true },
   passwordHash: { type: String, required: true },
   toners: [{ type: mongoose.Schema.Types.ObjectId, ref: "Toner" }],
 });

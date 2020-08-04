@@ -23,7 +23,6 @@ usersRouter.post("/", async (request, response, next) => {
     const user = new User({
       usergroup: body.usergroup,
       username: body.username,
-      nickname: body.nickname,
       passwordHash,
     });
 
