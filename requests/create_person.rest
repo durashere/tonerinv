@@ -2,7 +2,8 @@ POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-    "username": "root",
-    "name": "superuser",
+    "usergroup": "admnin",
+    "username": "root2",
+    "nickname": "superuser2",
     "password": "maokai"
 }

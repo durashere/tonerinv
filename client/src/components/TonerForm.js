@@ -10,8 +10,8 @@ const TonerForm = () => {
 
   const addToner = async (event) => {
     event.preventDefault();
-    setModel("");
     dispatch(createToner(model));
+    setModel("");
   };
 
   return (

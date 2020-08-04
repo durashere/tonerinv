@@ -1,6 +1,6 @@
-import tonerService from "../services/toners";
+import tonerService from "../services/tonerService";
 
-const reducer = (state = [], action) => {
+const tonerReducer = (state = [], action) => {
   console.log("state now: ", state);
   console.log("action", action);
   switch (action.type) {
@@ -76,4 +76,4 @@ export const removeToner = (toner) => {
   };
 };
 
-export default reducer;
+export default tonerReducer;

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import tonerService from "./services/toners";
-import loginService from "./services/login";
+import tonerService from "./services/tonerService";
+import loginService from "./services/loginService";
 
 import SignIn from "./components/SignIn";
 import Main from "./components/Main";
 
 import { initToners } from "./reducers/tonerReducer";
+import { initUsers } from "./reducers/userReducer";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,10 @@ function App() {
 
   useEffect(() => {
     dispatch(initToners());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(initUsers());
   }, [dispatch]);
 
   const handleLogin = async (credential) => {

@@ -21,13 +21,47 @@ usersRouter.post("/", async (request, response, next) => {
     const passwordHash = await bcrypt.hash(body.password, saltRounds);
 
     const user = new User({
+      usergroup: body.usergroup,
       username: body.username,
-      name: body.name,
+      nickname: body.nickname,
       passwordHash,
     });
 
     const savedUser = await user.save();
     response.json(savedUser);
+  } catch (exception) {
+    next(exception);
+  }
+});
+
+// tonersRouter.put("/:id", async (request, response, next) => {
+//   const { body } = request;
+
+//   try {
+//     const tonerObject = {
+//       model: body.model,
+//       amount: body.amount,
+//     };
+//     const updatedToner = await Toner.findByIdAndUpdate(
+//       request.params.id,
+//       tonerObject,
+//       {
+//         new: true,
+//       },
+//     );
+//     await updatedToner
+//       .populate({ path: "user", select: ["name", "username"] })
+//       .execPopulate();
+//     response.status(201).json(updatedToner.toJSON());
+//   } catch (exception) {
+//     next(exception);
+//   }
+// });
+
+usersRouter.delete("/:id", async (request, response, next) => {
+  try {
+    await User.findByIdAndRemove(request.params.id);
+    response.status(204).end();
   } catch (exception) {
     next(exception);
   }

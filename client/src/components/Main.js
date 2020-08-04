@@ -7,9 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 // import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
@@ -22,9 +20,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // import NotificationsIcon from "@material-ui/icons/Notifications";
-import { mainListItems, secondaryListItems } from "./listItems";
 
+import MainDrawer from "./MainDrawer";
 import Dashboard from "./Dashboard";
+import UserList from "./UserList";
+import UserForm from "./UserForm";
 import TonerList from "./TonerList";
 import TonerForm from "./TonerForm";
 import Copyright from "./Copyright";
@@ -187,16 +187,25 @@ export default function Main({ user, handleLogout }) {
               <ChevronLeftIcon />
             </IconButton>
           </div>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          <MainDrawer />
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" className={classes.container}>
             <Switch>
-              <Route path="/tonerform">
+              <Route path="/toners/list">
+                <Paper>
+                  <TonerList user={user} />
+                </Paper>
+              </Route>
+
+              <Route path="/admin/users/list">
+                <Paper>
+                  <UserList />
+                </Paper>
+              </Route>
+
+              <Route path="/admin/toners/create">
                 <Grid container spacing={3}>
                   <Grid item xs={12}>
                     <Paper className={classes.paper}>
@@ -205,15 +214,17 @@ export default function Main({ user, handleLogout }) {
                   </Grid>
                 </Grid>
               </Route>
-              <Route path="/tonerlist">
+
+              <Route path="/admin/users/create">
                 <Grid container spacing={3}>
-                  <Grid item xs={12}>
+                  <Grid item xs={3}>
                     <Paper className={classes.paper}>
-                      <TonerList user={user} />
+                      <UserForm user={user} />
                     </Paper>
                   </Grid>
                 </Grid>
               </Route>
+
               <Route path="/">
                 <Dashboard />
               </Route>
