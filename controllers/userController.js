@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const usersRouter = require("express").Router();
-const User = require("../models/user");
+const User = require("../models/userModel");
 
 usersRouter.get("/", async (request, response) => {
   const users = await User.find({}).populate("toners", {

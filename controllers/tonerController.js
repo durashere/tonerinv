@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const tonersRouter = require("express").Router();
-const Toner = require("../models/toner");
-const User = require("../models/user");
+const Toner = require("../models/tonerModel");
+const User = require("../models/userModel");
 
 tonersRouter.get("/", async (request, response) => {
   const toners = await Toner.find({}).populate("user", {

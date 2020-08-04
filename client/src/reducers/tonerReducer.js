@@ -3,6 +3,7 @@ import tonerService from "../services/tonerService";
 const tonerReducer = (state = [], action) => {
   console.log("state now: ", state);
   console.log("action", action);
+
   switch (action.type) {
     case "INIT_TONERS":
       return action.data;

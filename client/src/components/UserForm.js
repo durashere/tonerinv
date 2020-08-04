@@ -11,8 +11,6 @@ const UserForm = () => {
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(usergroup, username, nickname, password);
-
   const groups = [
     {
       value: "admin",

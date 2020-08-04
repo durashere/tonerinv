@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const config = require("./utils/config");
 
-const tonersRouter = require("./controllers/toners");
-const usersRouter = require("./controllers/users");
-const loginRouter = require("./controllers/login");
+const tonersRouter = require("./controllers/tonerController");
+const usersRouter = require("./controllers/userController");
+const loginRouter = require("./controllers/loginController");
 
 const middleware = require("./utils/middleware");
 const logger = require("./utils/logger");
