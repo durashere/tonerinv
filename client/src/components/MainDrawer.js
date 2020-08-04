@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MainDrawer = () => {
+  const currentUser = useSelector((state) => state.currentUser);
   const classes = useStyles();
   const [openSettingsToners, setOpenSettingsToners] = React.useState(true);
   const [openSettingsUsers, setOpenSettingsUsers] = React.useState(true);
@@ -59,60 +62,67 @@ const MainDrawer = () => {
           <ListItemText primary="Toners" />
         </ListItemLink>
       </div>
-      <div>
-        <ListSubheader>Admin</ListSubheader>
+      {currentUser.usergroup === "admin" ? (
+        <div>
+          <ListSubheader>Admin</ListSubheader>
 
-        <Divider />
+          <Divider />
 
-        <ListItem
-          button
-          onClick={() => setOpenSettingsToners(!openSettingsToners)}
-        >
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Toners" />
-          {openSettingsToners ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </ListItem>
-        <Collapse in={openSettingsToners} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemLink to="/admin/toners/create" className={classes.nested}>
-              <ListItemIcon>
-                <CreateIcon />
-              </ListItemIcon>
-              <ListItemText primary="Create toner" />
-            </ListItemLink>
-          </List>
-        </Collapse>
+          <ListItem
+            button
+            onClick={() => setOpenSettingsToners(!openSettingsToners)}
+          >
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Toners" />
+            {openSettingsToners ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </ListItem>
+          <Collapse in={openSettingsToners} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemLink
+                to="/admin/toners/create"
+                className={classes.nested}
+              >
+                <ListItemIcon>
+                  <CreateIcon />
+                </ListItemIcon>
+                <ListItemText primary="Create toner" />
+              </ListItemLink>
+            </List>
+          </Collapse>
 
-        <ListItem
-          button
-          onClick={() => setOpenSettingsUsers(!openSettingsUsers)}
-        >
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-          {openSettingsUsers ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        </ListItem>
-        <Collapse in={openSettingsUsers} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemLink to="/admin/users/list" className={classes.nested}>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="List users" />
-            </ListItemLink>
+          <ListItem
+            button
+            onClick={() => setOpenSettingsUsers(!openSettingsUsers)}
+          >
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Users" />
+            {openSettingsUsers ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </ListItem>
+          <Collapse in={openSettingsUsers} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemLink to="/admin/users/list" className={classes.nested}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="List users" />
+              </ListItemLink>
 
-            <ListItemLink to="/admin/users/create" className={classes.nested}>
-              <ListItemIcon>
-                <CreateIcon />
-              </ListItemIcon>
-              <ListItemText primary="Create user" />
-            </ListItemLink>
-          </List>
-        </Collapse>
-      </div>
+              <ListItemLink to="/admin/users/create" className={classes.nested}>
+                <ListItemIcon>
+                  <CreateIcon />
+                </ListItemIcon>
+                <ListItemText primary="Create user" />
+              </ListItemLink>
+            </List>
+          </Collapse>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
